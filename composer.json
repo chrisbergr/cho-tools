@@ -1,0 +1,18 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Cho\\": "cho/",
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "league/glide": "^2.2",
+        "league/config": "^1.0",
+        "league/route": "^5.1",
+        "league/plates": "^3.5",
+        "zendframework/zend-diactoros": "^2.2",
+        "laminas/laminas-diactoros": "^2.4",
+        "laminas/laminas-httphandlerrunner": "^1.2",
+        "league/container": "^4.2"
+    }
+}

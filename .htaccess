@@ -1,0 +1,14 @@
+#RewriteRule ^uploads/.+$ /image.php?file=$0 [NC,L,QSA]
+
+AddDefaultCharset utf-8
+Options +FollowSymLinks
+
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
+</IfModule>

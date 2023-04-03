@@ -1,0 +1,6 @@
+{
+	"preset": "jquery",
+    "maximumLineLength": 500,
+    "validateLineBreaks": "CRLF",
+    "requireCamelCaseOrUpperCaseIdentifiers": true
+}
