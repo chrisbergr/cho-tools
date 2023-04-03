@@ -39,7 +39,7 @@ composer.phar
 npm-debug.log
 bin/
 
-config.php
+/config.php
 
 public/info.php
 public/cache.php
