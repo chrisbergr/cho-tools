@@ -23,8 +23,12 @@ $cfg = new Configuration([
 		'name'     => Expect::string()->required(),
 	]),
 	'images' => Expect::structure([
-		'salt' => Expect::string()->required(),
-		'base' => Expect::string()->required(),
+		'salt'         => Expect::string()->required(),
+		'base'         => Expect::string()->required(),
+		'ftp_host'     => Expect::string()->required(),
+		'ftp_root'     => Expect::string()->required(),
+		'ftp_username' => Expect::string()->required(),
+		'ftp_password' => Expect::string()->required(),
 	]),
 	'website' => Expect::structure([
 		'login'         => Expect::string()->required(),
