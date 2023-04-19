@@ -274,4 +274,20 @@ class Helper {
 		return $response;
 	}
 
+	public function use_ftp() {
+		$adapter = new \League\Flysystem\Ftp\FtpAdapter(
+			\League\Flysystem\Ftp\FtpConnectionOptions::fromArray( [
+				'host'     => $this->config->get_images_ftp_host(),
+				'root'     => $this->config->get_images_ftp_root(),
+				'username' => $this->config->get_images_ftp_username(),
+				'password' => $this->config->get_images_ftp_password(),
+			] ),
+			new \League\Flysystem\Ftp\FtpConnectionProvider(),
+			new \League\Flysystem\Ftp\NoopCommandConnectivityChecker(),
+			new \League\Flysystem\UnixVisibility\PortableVisibilityConverter()
+		);
+		$filesystem = new \League\Flysystem\Filesystem( $adapter );
+		return $filesystem;
+	}
+
 }

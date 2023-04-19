@@ -15,23 +15,33 @@ class Files extends \Cho\Core\Presenter {
 
 		$response = new \Laminas\Diactoros\Response;
 
-		$adapter = new \League\Flysystem\Ftp\FtpAdapter(
-			// Connection options
-			\League\Flysystem\Ftp\FtpConnectionOptions::fromArray([
-				'host'     => $this->config->get_images_ftp_host(),
-				'root'     => $this->config->get_images_ftp_root(),
-				'username' => $this->config->get_images_ftp_username(),
-				'password' => $this->config->get_images_ftp_password(),
-			]),
-			new \League\Flysystem\Ftp\FtpConnectionProvider(),
-			new \League\Flysystem\Ftp\NoopCommandConnectivityChecker(),
-			new \League\Flysystem\UnixVisibility\PortableVisibilityConverter()
-		);
+		//$adapter = new \League\Flysystem\Ftp\FtpAdapter(
+		//	// Connection options
+		//	\League\Flysystem\Ftp\FtpConnectionOptions::fromArray([
+		//		'host'     => $this->config->get_images_ftp_host(),
+		//		'root'     => $this->config->get_images_ftp_root(),
+		//		'username' => $this->config->get_images_ftp_username(),
+		//		'password' => $this->config->get_images_ftp_password(),
+		//	]),
+		//	new \League\Flysystem\Ftp\FtpConnectionProvider(),
+		//	new \League\Flysystem\Ftp\NoopCommandConnectivityChecker(),
+		//	new \League\Flysystem\UnixVisibility\PortableVisibilityConverter()
+		//);
 
-		// The FilesystemOperator
-		$filesystem = new \League\Flysystem\Filesystem($adapter);
+		//// The FilesystemOperator
+		//$filesystem = new \League\Flysystem\Filesystem($adapter);
 
-		print_r($filesystem->listContents('/render')->toArray());
+		//print_r((array) $filesystem->listContents('/render')->toArray());
+
+		$path = '/';
+		if ( isset( $_GET['path'] ) ) {
+			$path = $_GET['path'];
+		}
+
+
+		$files = new \App\Collection\Files( array( 'path' => $path ) );
+
+		print_r( $files->get_json_data() );
 
 		die();
 

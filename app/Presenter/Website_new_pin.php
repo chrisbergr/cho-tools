@@ -45,7 +45,7 @@ class Website_new_pin extends \Cho\Core\Presenter {
 			$url = $_GET['site_url'];
 		}
 
-		$request = new \App\Collection\Pins_images( array('url' => $url) );
+		$request = new \App\Collection\Pins_images( array( 'url' => $url ) );
 
 		$data = array(
 			'request' => $request->get_data(),
