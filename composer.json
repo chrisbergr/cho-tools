@@ -15,6 +15,7 @@
         "laminas/laminas-httphandlerrunner": "^1.2",
         "league/container": "^4.2",
         "league/flysystem": "3.0",
-        "league/flysystem-ftp": "3.0"
+        "league/flysystem-ftp": "3.0",
+        "chrome-php/chrome": "^1.8"
     }
 }

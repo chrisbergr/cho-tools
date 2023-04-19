@@ -30,6 +30,7 @@ class Router {
 		$this->router->map( 'GET', '/files/', [ new \App\Presenter\Files, 'index' ] );
 		$this->router->map( 'GET', '/files/upload/', [ new \App\Presenter\Files, 'upload' ] );
 		$this->router->map( 'POST', '/files/upload/', [ new \App\Presenter\Files, 'upload_receiver' ] );
+		$this->router->map( 'GET', '/files/screenshot/', [ new \App\Presenter\Files, 'screenshot' ] );
 
 		$this->router->map( 'GET', '/website/new-pin/', [ new \App\Presenter\Website_new_pin, 'index' ] );
 		$this->router->map( 'GET', '/website/new-pin/tags/', [ new \App\Presenter\Website_new_pin, 'tags' ] );
