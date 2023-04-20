@@ -16,4 +16,12 @@ class Files extends \Cho\Core\View {
 		return $this->build( $this->tpl->make( 'pages/files/upload-receiver' ), $data );
 	}
 
+	public function list( $data = null ) {
+		return $this->build( $this->tpl->make( 'pages/files/list' ), $data );
+	}
+
+	public function detail( $data = null ) {
+		return $this->build( $this->tpl->make( 'pages/files/detail' ), $data );
+	}
+
 }

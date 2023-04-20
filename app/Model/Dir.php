@@ -12,7 +12,7 @@ class Dir extends \Cho\Core\Model {
 		$data = array(
 			'type'      => 'dir',
 			'name'      => basename( $raw_data['path'] ),
-			'path'      => $raw_data['path'],
+			'path'      => $raw_data['path'] . '/',
 		);
 		$this->data = $data;
 	}

@@ -15,43 +15,47 @@ class Files extends \Cho\Core\Presenter {
 
 		$response = new \Laminas\Diactoros\Response;
 
-		//$adapter = new \League\Flysystem\Ftp\FtpAdapter(
-		//	// Connection options
-		//	\League\Flysystem\Ftp\FtpConnectionOptions::fromArray([
-		//		'host'     => $this->config->get_images_ftp_host(),
-		//		'root'     => $this->config->get_images_ftp_root(),
-		//		'username' => $this->config->get_images_ftp_username(),
-		//		'password' => $this->config->get_images_ftp_password(),
-		//	]),
-		//	new \League\Flysystem\Ftp\FtpConnectionProvider(),
-		//	new \League\Flysystem\Ftp\NoopCommandConnectivityChecker(),
-		//	new \League\Flysystem\UnixVisibility\PortableVisibilityConverter()
-		//);
-
-		//// The FilesystemOperator
-		//$filesystem = new \League\Flysystem\Filesystem($adapter);
-
-		//print_r((array) $filesystem->listContents('/render')->toArray());
-
 		$path = '/';
 		if ( isset( $_GET['path'] ) ) {
 			$path = $_GET['path'];
 		}
 
+		if ( '/' === substr( $path, -1 ) ) {
 
-		$files = new \App\Collection\Files( array( 'path' => $path ) );
+			$files = new \App\Collection\Files( array( 'path' => $path ) );
+			$request = $files->get_data();
 
-		print_r( $files->get_json_data() );
+			$data = array(
+				'query'    => $request,
+				'greeting' => '<p>Hello hello! I am the Files Presenter</p>',
+			);
 
-		die();
+			$response->getBody()->write( $this->view->list( $data ) );
+			return $response;
 
-		//$data = array(
-		//	'new_pin_url' => $this->config->get_root() . '/website/new-pin/',
-		//	'greeting'    => '<p>Hello hello! I am the Home Presenter</p><p><img src="' . $this->helper->get_image_url( 'render/cho-cover--10.png', ['w' => 500, 'fit' => 'crop', 'q' => 100, 'sharp' => 10, 'dpr' => 2] ) . '" width="500"></p>',
-		//);
+		} else {
 
-		//$response->getBody()->write( $this->view->index( $data ) );
-		//return $response;
+			$files = new \App\Collection\Files( array( 'path' => $path ) );
+			$request = $files->get_data();
+
+			$raw_data = $request['items'][0];
+
+			$dir_up = str_replace( basename( $path ), '', $path );
+
+			if ( '' === $dir_up ) {
+				$dir_up = '/';
+			}
+
+			$data = array(
+				'dir_up'   => $dir_up,
+				'image'    => $this->helper->get_image_url( str_replace( '//' . $path, '', $raw_data['path'] ), [ 'w' => 1280, 'fit' => 'crop', 'q' => 100, 'sharp' => 10, 'dpr' => 1 ] ),
+				'greeting' => '<p>Hello hello! I am the Files Presenter</p>',
+			);
+
+			$response->getBody()->write( $this->view->detail( $data ) );
+			return $response;
+
+		}
 
 	}
 
@@ -105,7 +109,10 @@ class Files extends \Cho\Core\Presenter {
 				$contents = file_get_contents( $the_file['tmp_name'] );
 				$filesystem->write( $path, $contents, $config );
 
-				$notice = 'New File ' . $path . ' created';
+				$path_src = $path;
+				$path_src = ltrim( $path_src, '/' );
+
+				$notice = 'New File <a href="/files/?path=' . $path_src . '">' . $path . '</a> created';
 
 			} catch ( \League\Flysystem\FilesystemException | \League\Flysystem\UnableToWriteFile $exception ) {
 				$notice = $exception;

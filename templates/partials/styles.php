@@ -43,6 +43,22 @@
 					width: unset;
 				}
 			}
+			.directory-list{
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				gap: 1rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.directory-list--item{
+				position: relative;
+			}
+			.directory-list--item img{
+				vertical-align: middle;
+				margin-inline-end: 1rem;
+			}
 			.image-list{
 				display: flex;
 				flex-wrap: wrap;
@@ -54,7 +70,7 @@
 			.image-list--item{
 				position: relative;
 				border-radius: 0.25rem;
-				font-size: 0;;
+				font-size: 0;
 			}
 			.image-list--item.active{
 				outline: 0.5rem solid #0085f2;
